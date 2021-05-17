@@ -24,7 +24,7 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 <img src="./ss1.png" height="760" width="1200"></img>
 
 <br>
-<img src="./ss2.png" height="760" width="1100"></img>
+<img src="./ss2.png" height="760" width="1200"></img>
 
 <br>
-<img src="./ss3.png" height="760" width="1100"></img>
+<img src="./ss3.png" height="760" width="1200"></img>
