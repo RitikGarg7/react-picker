@@ -5,11 +5,12 @@
     position:relative;
     overflow:hidden;
     border: 1px solid black;
+    cursor: pointer;
 }
 
-.root:hover{
-    cursor: pointer;
-
+.root:hover svg{
+    opacity: 1;
+    
 }
 
 .colors{
@@ -42,5 +43,24 @@
     display: inline-block; 
     margin: 0 auto;
     position: relative;
-    margin-bottom: -3.5px;
+    margin-bottom: -5px;
+}
+
+.delete{
+
+}
+ 
+
+.deleteIcon{
+    color:white;
+    background:#eb3d30;
+    width:20px;
+    height:20px;
+    position:absolute; 
+    opacity:0;
+    z-index:10;
+    padding:10px;
+    top:0px;
+    right:0px;
+    transition: all .3s ease-in-out;
 }

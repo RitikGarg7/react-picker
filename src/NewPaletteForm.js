@@ -21,7 +21,12 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Snackbar from '@material-ui/core/Snackbar';
+import CloseIcon from '@material-ui/icons/Close';
+
 // import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import {Picker} from 'emoji-mart';
+import 'emoji-mart/css/emoji-mart.css'; 
 
 const drawerWidth = 350;
 
@@ -62,9 +67,10 @@ const useStyles = makeStyles((theme) => ({
     display:'flex',
     alignItems:'center'
   },
-  drawerHeader: {
+  drawerHeader: { 
     display: 'flex',
     alignItems: 'center',
+    width:'100%',
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
@@ -72,8 +78,8 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1, 
-    height:`100vh`,
-    padding: theme.spacing(3),
+    height:`92vh`,
+    padding: 0,
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -129,6 +135,10 @@ const useStyles = makeStyles((theme) => ({
   },
   link:{
     textDecoration:'none'
+  },
+  ritik:{
+    display:'flex',
+    flexDirection:'column'
   }
 }));
 
@@ -144,6 +154,11 @@ function NewPaletteForm(props) {
     const paletteFull=colors.length>=20;
     const [open2, setOpen2] = useState(false);
     const [formShowing,setformShowing]=useState(false);
+    const [emoji,setEmoji]=useState('');
+    const [openSnack,setOpenSnack]=useState(false);
+    const  closeSnackbar=() =>{
+      setOpenSnack(false);
+  }
 
     const handleClickOpen = () => {
       setOpen2(true);
@@ -185,7 +200,7 @@ function NewPaletteForm(props) {
     const savePalette=()=>{
         let newName=newPaletteName;
         const newPalette={
-
+            emoji:emoji,
             paletteName:newName,
             id:newName.toLowerCase().replace(/ /g,"-"),
             colors:colors
@@ -214,6 +229,11 @@ function NewPaletteForm(props) {
         
         setColors([...colors, randomColor] );
     } 
+
+    const selectEmoji=(mystery)=>{
+      // setOpenSnack(true);
+      setEmoji(mystery.native);
+    }
     return (
         <div className={classes.root}>
       <CssBaseline />
@@ -245,14 +265,19 @@ function NewPaletteForm(props) {
               <Dialog open={open2} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
                 <form onSubmit={savePalette}> 
-                <DialogContent>
+                <DialogContent className={classes.ritik}>
                   <DialogContentText>
-                    To subscribe to this website, please enter your email address here. We will send updates
-                    occasionally.
+                    Enter a name to save your Palette !
                   </DialogContentText>
-                  
-                    <input value={newPaletteName} onChange={handleChange2} name='newPaletteName'></input>
-                   
+                  <Picker onSelect={selectEmoji} title="Pick a Palette Emoji"/>
+  {/* * * * * * * * * * <input value={newPaletteName} onChange={handleChange2} name='newPaletteName'></input> */}
+                  <TextField 
+                    id="ritik" 
+                    label="newPaletteName" 
+                    variant="filled"  
+                    style={{marginTop:'1rem'}}
+                    value={newPaletteName} 
+                    onChange={handleChange2} name='newPaletteName'/>
                   
                 </DialogContent>
                 <DialogActions>
@@ -275,7 +300,7 @@ function NewPaletteForm(props) {
                 color='secondary' className={classes.btn} >Go Back</Button>
             </Link>
             <Button variant="contained" color="primary" onClick={handleClickOpen} className={classes.btn}>
-                Open form dialog
+                Save
               </Button>
 
         </div>
@@ -303,7 +328,7 @@ function NewPaletteForm(props) {
             <Button className={classes.button} variant='contained' color='primary' onClick={addRandom}>Random Color</Button>
 
         </div>
-        <ChromePicker  
+        <ChromePicker  style={{'width':'100% !important'}}
             classname={classes.picker}
             color={currentcolor} 
             onChangeComplete={(newcolor)=>updateCurrentColor(newcolor)} 
@@ -340,7 +365,10 @@ function NewPaletteForm(props) {
             axis='xy'
             onSortEnd={onSortEnd}
             />
+
+
       </main>
+       
     </div>
     )
 }

@@ -17,11 +17,17 @@ function App() {
       return palette.id === id;
     });
   }
+
+  const deletePalette=(id)=> {
+     
+  }
+
   const savePalette=(newPalette)=>{
     console.log(newPalette);
     setPalettes([...palettes,newPalette])
     console.log(palettes);
   }
+
   return (
     // <div className="App">
     //   <Palette palette={generatePalette(colorsData[4])}/>

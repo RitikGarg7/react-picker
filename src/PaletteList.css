@@ -1,11 +1,12 @@
 
 .root-dash{
     background-color: blue;
-    min-height: 100px;
-    height:auto;
+    height: 100vh; 
     display:flex;
     align-items: flex-start;
     justify-content: center;
+    overflow: scroll;
+    background: url('./bg.svg');
 }
 
 .container{ 
